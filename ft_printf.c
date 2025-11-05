@@ -27,7 +27,7 @@ int	ft_printf(const char *format, ...)
 		if (*format == '%')
 			count += print_format(*++format, ap);
 		else
-			count += ft_putchar_fd(*format, 1);
+			count += ft_putchar_fdr(*format, 1);
 		*format++;
 	}
 	va_end(ap);
@@ -40,12 +40,12 @@ int print_format(char print, va_list ap)
 
 	count = 0;
 	if (print == 'c')
-		count += ft_putchar_fd(va_arg(ap, int), 1);
+		count += ft_putchar_fdr(va_arg(ap, int), 1);
 	else if (print == 's')
-		count += ft_putstr_fd(va_arg(ap, char *, 1));
+		count += ft_putstr_fdr(va_arg(ap, char *, 1));
 	else if (print == 'd')
-		count += ft_putnbr_fd(va_arg(ap, int), 1);
+		count += ft_putnbr_fdr(va_arg(ap, int), 1);
 	else if (print == 'x')
-		count += print_hexa(va_arg(ap, unsigned int));
+		count += print_hexa((long)(va_arg(ap, unsigned int)));
 	return (count);
 }
