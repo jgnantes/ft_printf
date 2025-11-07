@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
+#include "libft.h"
 #include <stdarg.h>
 
 int	print_format(char print, va_list ap);
 
 int	ft_printf(const char *format, ...)
 {
-	int     count;
-	va_list ap;
+	int		count;
+	va_list	ap;
 
 	va_start(ap, format);
 	count = 0;
@@ -31,18 +31,27 @@ int	ft_printf(const char *format, ...)
 		*format++;
 	}
 	va_end(ap);
-	return count;
+	return (count);
 }
 
-int print_format(char print, va_list ap)
+/*int	main(void)
 {
-	int count;
+	char c = 'c'; //1
+	char *s = "palavras"; //8
+	int n = -42; //3
+	int i = ft_printf("char: %c\nstring: %s\ninteger: %d\n", c, s, n);
+	ft_printf("%d\n", i);
+}*/
+
+int	print_format(char print, va_list ap)
+{
+	int	count;
 
 	count = 0;
 	if (print == 'c')
 		count += ft_putchar_fdr(va_arg(ap, int), 1);
 	else if (print == 's')
-		count += ft_putstr_fdr(va_arg(ap, char *, 1));
+		count += ft_putstr_fdr(va_arg(ap, char *), 1);
 	else if (print == 'd')
 		count += ft_putnbr_fdr(va_arg(ap, int), 1);
 	else if (print == 'x')
