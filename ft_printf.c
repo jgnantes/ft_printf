@@ -29,7 +29,7 @@ int	ft_printf(const char *format, ...)
 		if (format[i] == '%')
 			count += print_format(format[++i], ap);
 		else
-			count += ft_putchar_fdr(format[++i], 1);
+			count += ft_putchar_fdr(format[i], 1);
 		i++;
 	}
 	
@@ -37,14 +37,14 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-/*int	main(void)
+int	main(void)
 {
-	char c = 'c'; //1
+	char c = 'a'; //1
 	char *s = "palavras"; //8
 	int n = -42; //3
 	int i = ft_printf("char: %c\nstring: %s\ninteger: %d\n", c, s, n);
 	ft_printf("%d\n", i);
-}*/
+}
 
 int	print_format(char print, va_list ap)
 {
