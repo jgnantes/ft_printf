@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "includes/libft.h"
 #include <stdarg.h>
 
 int	print_format(char print, va_list ap);
@@ -18,18 +18,21 @@ int	print_format(char print, va_list ap);
 int	ft_printf(const char *format, ...)
 {
 	int		count;
+	int		i;
 	va_list	ap;
 
+	i = 0;
 	va_start(ap, format);
 	count = 0;
-	while (*format != '\0')
+	while (format[i] != '\0')
 	{
-		if (*format == '%')
-			count += print_format(*++format, ap);
+		if (format[i] == '%')
+			count += print_format(format[++i], ap);
 		else
-			count += ft_putchar_fdr(*format, 1);
-		*format++;
+			count += ft_putchar_fdr(format[++i], 1);
+		i++;
 	}
+	
 	va_end(ap);
 	return (count);
 }
@@ -54,7 +57,7 @@ int	print_format(char print, va_list ap)
 		count += ft_putstr_fdr(va_arg(ap, char *), 1);
 	else if (print == 'd')
 		count += ft_putnbr_fdr(va_arg(ap, int), 1);
-	else if (print == 'x')
-		count += print_hexa((long)(va_arg(ap, unsigned int)));
+	//else if (print == 'x')
+	//	count += print_hexa((long)(va_arg(ap, unsigned int)));
 	return (count);
 }
