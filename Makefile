@@ -10,31 +10,26 @@ OBJS = $(SRCS:.c=.o)
 LIB = libft.a
 LIB_DIR = ./includes/
 LIB_PATH = $(LIB_DIR)$(LIB)
-INCLUDES = -I$(LIB_PATH)
+INCLUDES = -I$(LIB_DIR)
 
 all: $(NAME)
 
 $(LIB):
 	make bonus -C $(LIB_DIR)
-	mv $(LIB_PATH) .
-
-$(LIB_OBJS): $(LIB)
-	$(AR) $(LIB_OBJS) $(LIB)
 
 $(NAME): $(OBJS) $(LIB)
-	ar x $(LIB)
-	$(AR) $(NAME) $(OBJS) *.o 
-	rm -f *.o
+	cp $(LIB_PATH) $(NAME)
+	$(AR) $(NAME) $(OBJS)
 
 $(OBJS): $(SRCS)
-	$(CC) $(CFLAGS) $(INCLUDES) $(SRCS) -c
+	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRCS)
 
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJS)
 	make clean -C $(LIB_DIR)
 
 fclean: clean
-	rm -f $(NAME) $(LIB)
+	$(RM) $(NAME)
 	make fclean -C $(LIB_DIR)
 
 re: fclean all

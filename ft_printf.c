@@ -13,7 +13,7 @@
 #include "includes/libft.h"
 #include <stdarg.h>
 
-int	print_format(char print, va_list ap);
+static int	print_format(char print, va_list ap);
 
 int	ft_printf(const char *format, ...)
 {
@@ -46,7 +46,7 @@ int	ft_printf(const char *format, ...)
 	ft_printf("%d\n", i);
 }*/
 
-int	print_format(char print, va_list ap)
+static int	print_format(char print, va_list ap)
 {
 	int	count;
 
