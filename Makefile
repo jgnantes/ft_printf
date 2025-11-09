@@ -14,12 +14,12 @@ INCLUDES = -I$(LIB_DIR)
 
 all: $(NAME)
 
-$(LIB):
-	make bonus -C $(LIB_DIR)
-
-$(NAME): $(OBJS) $(LIB)
+$(NAME): $(OBJS) $(LIB_PATH)
 	cp $(LIB_PATH) $(NAME)
 	$(AR) $(NAME) $(OBJS)
+
+$(LIB_PATH):
+	make bonus -C $(LIB_DIR)
 
 $(OBJS): $(SRCS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $(SRCS)
