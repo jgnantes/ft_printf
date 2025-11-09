@@ -16,12 +16,14 @@ int	ft_putendl_fdr(char *s, int fd)
 {
 	int	i;
 
+	if (s == NULL)
+		return (ft_putendl_fdr("(null)", fd));
 	i = 0;
 	while (s[i] != '\0')
 	{
 		write(fd, &s[i], 1);
 		i++;
 	}
-	write(fd, "\n", 1);
+	i +=write(fd, "\n", 1);
 	return (i);
 }

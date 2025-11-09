@@ -16,6 +16,8 @@ int	ft_putstr_fdr(char *s, int fd)
 {
 	int	i;
 
+	if (s == NULL)
+		return (ft_putstr_fdr("(null)", fd));
 	i = 0;
 	while (s[i] != '\0')
 	{
