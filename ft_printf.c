@@ -34,7 +34,6 @@ int	ft_printf(const char *format, ...)
 			count += ft_putchar_fdr(format[i], 1);
 		i++;
 	}
-
 	va_end(ap);
 	return (count);
 }
@@ -101,9 +100,7 @@ static int	print_format(char specifier, va_list ap)
 		count += ft_putnbr_fdr(va_arg(ap, int), 1);
 	else if (specifier == 'u')
 		count += ft_putunsnbr_fdr(va_arg(ap, unsigned int), 1);
-	else if (specifier == 'x')
-		count += print_hexa((va_arg(ap, unsigned long)), specifier);
-	else if (specifier == 'X')
+	else if (specifier == 'x' || specifier == 'X')
 		count += print_hexa((va_arg(ap, unsigned long)), specifier);
 	else if (specifier == 'p')
 		count += print_hexa((uintptr_t)(va_arg(ap, void *)), specifier);
@@ -114,7 +111,7 @@ static int	print_format(char specifier, va_list ap)
 
 static int	print_hexa(unsigned long n, char specifier)
 {
-	int			count;
+	int		count;
 	char	*digits;
 
 	count = 0;
@@ -146,6 +143,6 @@ static int	ft_putunsnbr_fdr(unsigned int n, int fd)
 	count = 0;
 	if (n >= 10)
 		count += ft_putunsnbr_fdr(n / 10, fd);
-	count += ft_putchar_fdr((n % 10) + '0', fd);
+	count += ft_putchar_fdr((char)((n % 10) + '0'), fd);
 	return (count);
 }

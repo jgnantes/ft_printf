@@ -16,7 +16,7 @@ int	ft_putnbr_fdr(int n, int fd)
 {
 	long	long_n;
 	char	number;
-	int	count;
+	int		count;
 
 	long_n = n;
 	count = 0;
