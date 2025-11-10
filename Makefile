@@ -8,7 +8,7 @@ RM = rm -f
 
 OBJS = $(SRCS:.c=.o)
 LIB = libft.a
-LIB_DIR = ./includes/
+LIB_DIR = ./libft/
 LIB_PATH = $(LIB_DIR)$(LIB)
 INCLUDES = -I$(LIB_DIR)
 
