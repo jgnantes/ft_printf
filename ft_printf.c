@@ -6,15 +6,15 @@
 /*   By: jnantes- <jnantes-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 15:14:08 by jnantes-          #+#    #+#             */
-/*   Updated: 2025/11/05 15:14:12 by jnantes-         ###   ########.fr       */
+/*   Updated: 2025/11/10 16:58:00 by jnantes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
-#include <stdarg.h>
+#include "ft_printf.h"
 
 static int	print_format(char print, va_list ap);
-static int	print_hexa(unsigned long n, char specifier);
+static int	print_hexa(unsigned long long n, char specifier);
 static int	ft_putunsnbr_fdr(unsigned int n, int fd);
 
 int	ft_printf(const char *format, ...)
@@ -87,50 +87,49 @@ int	main(void)
 	return (0);
 }*/
 
-static int	print_format(char specifier, va_list ap)
+static int	print_format(char spec, va_list ap)
 {
 	int	count;
 
 	count = 0;
-	if (specifier == 'c')
+	if (spec == 'c')
 		count += ft_putchar_fdr(va_arg(ap, int), 1);
-	else if (specifier == 's')
+	else if (spec == 's')
 		count += ft_putstr_fdr(va_arg(ap, char *), 1);
-	else if (specifier == 'd' || specifier == 'i')
+	else if (spec == 'd' || spec == 'i')
 		count += ft_putnbr_fdr(va_arg(ap, int), 1);
-	else if (specifier == 'u')
+	else if (spec == 'u')
 		count += ft_putunsnbr_fdr(va_arg(ap, unsigned int), 1);
-	else if (specifier == 'x' || specifier == 'X')
-		count += print_hexa((va_arg(ap, unsigned long)), specifier);
-	else if (specifier == 'p')
-		count += print_hexa((uintptr_t)(va_arg(ap, void *)), specifier);
-	else if (specifier == '%')
+	else if (spec == 'x' || spec == 'X')
+		count += print_hexa(va_arg(ap, unsigned int), spec);
+	else if (spec == 'p')
+		count += print_hexa((unsigned long long)(va_arg(ap, void *)), spec);
+	else if (spec == '%')
 		count += ft_putchar_fdr('%', 1);
 	return (count);
 }
 
-static int	print_hexa(unsigned long n, char specifier)
+static int	print_hexa(unsigned long long n, char spec)
 {
 	int		count;
 	char	*digits;
 
 	count = 0;
-	if (specifier == 'p')
+	digits = "0123456789abcdef";
+	if (spec == 'p')
 	{
 		if (n == 0)
 			return (ft_putstr_fdr("(nil)", 1));
 		count += ft_putstr_fdr("0x", 1);
-		specifier = 'x';
+		spec = 'x';
 	}
-	else if (specifier == 'X')
+	if (spec == 'X')
 		digits = "0123456789ABCDEF";
-	else
-		digits = "0123456789abcdef";
 	if (n < 16)
 		count += ft_putchar_fdr(digits[n], 1);
 	else
 	{
-		count += print_hexa(n / 16, specifier);
+		count += print_hexa(n / 16, spec);
 		count += ft_putchar_fdr(digits[n % 16], 1);
 	}
 	return (count);
