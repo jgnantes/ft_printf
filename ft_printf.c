@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnantes- <jnantes-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jnantes- <jnantes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 15:14:08 by jnantes-          #+#    #+#             */
-/*   Updated: 2025/11/10 16:58:00 by jnantes-         ###   ########.fr       */
+/*   Updated: 2025/11/12 19:24:38 by jnantes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_printf.h"
 
 static int	print_format(char print, va_list ap);
-static int	print_hexa(unsigned long long n, char specifier);
+static int	print_hex(unsigned long long n, char specifier);
 
 int	ft_printf(const char *format, ...)
 {
@@ -116,15 +116,15 @@ static int	print_format(char spec, va_list ap)
 	else if (spec == 'u')
 		return (ft_putunsnbr_fdr(va_arg(ap, unsigned int), 1));
 	else if (spec == 'x' || spec == 'X')
-		return (print_hexa(va_arg(ap, unsigned int), spec));
+		return (print_hex(va_arg(ap, unsigned int), spec));
 	else if (spec == 'p')
-		return (print_hexa((unsigned long long)(va_arg(ap, void *)), spec));
+		return (print_hex((unsigned long)(va_arg(ap, void *)), spec));
 	else if (spec == '%')
 		return (ft_putchar_fdr('%', 1));
 	return (-1);
 }
 
-static int	print_hexa(unsigned long long n, char spec)
+static int	print_hex(unsigned long long n, char spec)
 {
 	int		count;
 	char	*digits;
@@ -145,7 +145,7 @@ static int	print_hexa(unsigned long long n, char spec)
 		count += ft_putchar_fdr(digits[n], 1);
 	else
 	{
-		count += print_hexa(n / 16, spec);
+		count += print_hex(n / 16, spec);
 		count += ft_putchar_fdr(digits[n % 16], 1);
 	}
 	return (count);
