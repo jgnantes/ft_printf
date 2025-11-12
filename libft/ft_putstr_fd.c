@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jnantes- <jnantes-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: jnantes- <jnantes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:28:00 by jnantes-          #+#    #+#             */
-/*   Updated: 2025/10/27 13:28:54 by jnantes-         ###   ########.fr       */
+/*   Updated: 2025/11/12 19:10:27 by jnantes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	ft_putstr_fd(char *s, int fd)
 
 	if (s == NULL)
 	{
-		write(fd, "(null)", 6);
+		ft_putstr_fd("(null)", fd);
 		return ;
 	}
 	i = 0;
 	while (s[i] != '\0')
 	{
-		write(fd, &s[i], 1);
+		ft_putchar_fd(s[i], fd);
 		i++;
 	}
 }
