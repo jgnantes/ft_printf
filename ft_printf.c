@@ -19,19 +19,27 @@ static int	print_hexa(unsigned long long n, char specifier);
 int	ft_printf(const char *format, ...)
 {
 	int		count;
-	int		i;
+	int		result;
 	va_list	ap;
 
 	va_start(ap, format);
 	count = 0;
-	i = 0;
-	while (format[i] != '\0')
+	while (*format != '\0')
 	{
-		if (format[i] == '%')
-			count += print_format(format[++i], ap);
+		if (*format == '%')
+		{
+			result = print_format(*++format, ap);
+			if (result == -1)
+				return (-1);
+			count += result;
+		}
 		else
-			count += ft_putchar_fdr(format[i], 1);
-		i++;
+		{
+			if (ft_putchar_fdr(*format, 1) == -1)
+				return (-1);
+			count++;
+		}
+		format++;
 	}
 	va_end(ap);
 	return (count);
@@ -99,24 +107,21 @@ int	main(void)
 
 static int	print_format(char spec, va_list ap)
 {
-	int	count;
-
-	count = 0;
 	if (spec == 'c')
-		count += ft_putchar_fdr(va_arg(ap, int), 1);
+		return (ft_putchar_fdr(va_arg(ap, int), 1));
 	else if (spec == 's')
-		count += ft_putstr_fdr(va_arg(ap, char *), 1);
+		return (ft_putstr_fdr(va_arg(ap, char *), 1));
 	else if (spec == 'd' || spec == 'i')
-		count += ft_putnbr_fdr(va_arg(ap, int), 1);
+		return (ft_putnbr_fdr(va_arg(ap, int), 1));
 	else if (spec == 'u')
-		count += ft_putunsnbr_fdr(va_arg(ap, unsigned int), 1);
+		return (ft_putunsnbr_fdr(va_arg(ap, unsigned int), 1));
 	else if (spec == 'x' || spec == 'X')
-		count += print_hexa(va_arg(ap, unsigned int), spec);
+		return (print_hexa(va_arg(ap, unsigned int), spec));
 	else if (spec == 'p')
-		count += print_hexa((unsigned long long)(va_arg(ap, void *)), spec);
+		return (print_hexa((unsigned long long)(va_arg(ap, void *)), spec));
 	else if (spec == '%')
-		count += ft_putchar_fdr('%', 1);
-	return (count);
+		return (ft_putchar_fdr('%', 1));
+	return (-1);
 }
 
 static int	print_hexa(unsigned long long n, char spec)
