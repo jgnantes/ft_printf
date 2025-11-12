@@ -15,7 +15,6 @@
 
 static int	print_format(char print, va_list ap);
 static int	print_hexa(unsigned long long n, char specifier);
-static int	ft_putunsnbr_fdr(unsigned int n, int fd);
 
 int	ft_printf(const char *format, ...)
 {
@@ -115,7 +114,6 @@ static int	print_hexa(unsigned long long n, char spec)
 	char	*digits;
 
 	count = 0;
-	digits = "0123456789abcdef";
 	if (spec == 'p')
 	{
 		if (n == 0)
@@ -123,7 +121,9 @@ static int	print_hexa(unsigned long long n, char spec)
 		count += ft_putstr_fdr("0x", 1);
 		spec = 'x';
 	}
-	if (spec == 'X')
+	if (spec == 'x')
+		digits = "0123456789abcdef";
+	else if (spec == 'X')
 		digits = "0123456789ABCDEF";
 	if (n < 16)
 		count += ft_putchar_fdr(digits[n], 1);
@@ -132,16 +132,5 @@ static int	print_hexa(unsigned long long n, char spec)
 		count += print_hexa(n / 16, spec);
 		count += ft_putchar_fdr(digits[n % 16], 1);
 	}
-	return (count);
-}
-
-static int	ft_putunsnbr_fdr(unsigned int n, int fd)
-{
-	int	count;
-
-	count = 0;
-	if (n >= 10)
-		count += ft_putunsnbr_fdr(n / 10, fd);
-	count += ft_putchar_fdr((char)((n % 10) + '0'), fd);
 	return (count);
 }

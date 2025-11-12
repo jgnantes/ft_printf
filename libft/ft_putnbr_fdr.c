@@ -15,22 +15,18 @@
 int	ft_putnbr_fdr(int n, int fd)
 {
 	long	long_n;
-	char	number;
 	int		count;
 
 	long_n = n;
 	count = 0;
 	if (long_n < 0)
 	{
-		write(fd, "-", 1);
+		count += ft_putchar_fdr('-', fd);
 		long_n = -long_n;
-		count++;
 	}
 	if (long_n >= 10)
 		count += ft_putnbr_fdr((int)(long_n / 10), fd);
-	number = 48 + (char)(int)(long_n % 10);
-	write(fd, &number, 1);
-	count++;
+	count += ft_putchar_fdr(48 + (char)(int)(long_n % 10), fd);
 	return (count);
 }
 

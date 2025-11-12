@@ -15,21 +15,19 @@
 void	ft_putnbr_fd(int n, int fd)
 {
 	long	long_n;
-	char	number;
 
 	long_n = n;
 	if (long_n < 0)
 	{
-		write(fd, "-", 1);
+		ft_putchar_fd('-', fd);
 		long_n = -long_n;
 	}
 	if (long_n >= 10)
 		ft_putnbr_fd((int)(long_n / 10), fd);
-	number = 48 + (char)(int)(long_n % 10);
-	write(fd, &number, 1);
+	ft_putchar_fd(48 + (char)(int)(long_n % 10), fd);
 }
 
-/*#include <stdio.h>
+#include <stdio.h>
 int	main(void)
 {
 	printf("Test 1: Positive number\nExpected: 12345\nOutput:   ");
@@ -65,4 +63,4 @@ int	main(void)
 	write(1, "\n", 1);
 
 	return (0);
-}*/
+}
