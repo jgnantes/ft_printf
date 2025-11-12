@@ -46,21 +46,6 @@ int	main(void)
 	ft_printf("FT Decimal: %d\n", n);
 	printf("OG Decimal: %d\n", n);
 
-	ft_printf("FT Integer: %i\n", n);
-	printf("OG Integer: %i\n", n);
-
-	ft_printf("FT Unsigned: %u\n", n);
-	printf("OG Unsigned: %u\n", n);
-
-	ft_printf("FT Hexadecimal lowercase: %x\n", n);
-	printf("OG Hexadecimal lowercase: %x\n", n);
-
-	ft_printf("FT Hexadecimal uppercase: %X\n", n);
-	printf("OG Hexadecimal uppercase: %X\n", n);
-
-	ft_printf("FT Pointer: %p\n", &n);
-	printf("OG Pointer: %p\n", &n);
-
 	ft_printf("FT Character: %c\n", c);
 	printf("OG Character: %c\n", c);
 
@@ -70,15 +55,41 @@ int	main(void)
 	ft_printf("FT Percent sign: %%\n");
 	printf("OG Percent sign: %%\n\n");
 
-	int i = ft_printf("Here are 23 characters\n");
-	ft_printf("FT Count %d\n", i);
-	printf("OG Count %d\n\n", i);
+	int FTS = ft_printf("FT Integer: %i\n", n);
+	ft_printf("FT Count: %d\n", FTS);
+	int OGS = printf("OG Integer: %i\n", n);
+	printf("OG Count: %d\n\n", OGS);
+
+	int FTU = ft_printf("FT Unsigned: %u\n", n);
+	ft_printf("FT Count: %d\n", FTU);
+	int OGU = printf("OG Unsigned: %u\n", n);
+	printf("OG Count: %d\n\n", OGU);
+
+	int FTHL = ft_printf("FT Hexadecimal lowercase: %x\n", n);
+	ft_printf("FT Count: %d\n", FTHL);
+	int OGHl = printf("OG Hexadecimal lowercase: %x\n", n);
+	printf("OG Count: %d\n\n", OGHl);
+
+	int FTHU = ft_printf("FT Hexadecimal uppercase: %X\n", n);
+	ft_printf("FT Count: %d\n", FTHU);
+	int OGHU = printf("OG Hexadecimal uppercase: %X\n", n);
+	printf("OG Count: %d\n\n", OGHU);
+
+	int FTP = ft_printf("FT Pointer: %p\n", &n);
+	ft_printf("FT Count: %d\n", FTP);
+	int OGP = printf("OG Pointer: %p\n", &n);
+	printf("OG Count: %d\n\n", OGP);
 
 	char *ptr = NULL;
-	ft_printf("FT Pointer NULL: %p\n", ptr);
-	printf("OG Pointer NULL: %p\n", ptr);
-	ft_printf("FT String NULL: %s\n", ptr);
-	printf("OG String NULL: %s\n", ptr);
+	int FTPN = ft_printf("FT Pointer NULL: %p\n", ptr);
+	ft_printf("FT Count: %d\n", FTPN);
+	int OGPN = printf("OG Pointer NULL: %p\n", ptr);
+	printf("OG Count: %d\n\n", OGPN);
+
+	int FTSN = ft_printf("FT String NULL: %s\n", ptr);
+	printf("FT Count: %d\n", FTSN);
+	int OGSN = printf("OG String NULL: %s\n", ptr);
+	printf("OG Count: %d\n\n", OGSN);
 
 	//ft_printf("Percent test 100%     \n");
 	//printf("Percent test 100%     \n");

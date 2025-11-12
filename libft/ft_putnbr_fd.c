@@ -27,7 +27,7 @@ void	ft_putnbr_fd(int n, int fd)
 	ft_putchar_fd(48 + (char)(int)(long_n % 10), fd);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 int	main(void)
 {
 	printf("Test 1: Positive number\nExpected: 12345\nOutput:   ");
@@ -63,4 +63,4 @@ int	main(void)
 	write(1, "\n", 1);
 
 	return (0);
-}
+}*/
