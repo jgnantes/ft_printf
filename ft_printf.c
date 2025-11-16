@@ -13,22 +13,22 @@
 #include "libft/libft.h"
 #include "ft_printf.h"
 
-static int	print_format(char print, va_list ap);
+static int	print_format(char print, va_list arg);
 static int	print_hex(unsigned long long n, char specifier);
 
 int	ft_printf(const char *format, ...)
 {
 	int		count;
 	int		result;
-	va_list	ap;
+	va_list	arg;
 
-	va_start(ap, format);
+	va_start(arg, format);
 	count = 0;
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-			result = print_format(*++format, ap);
+			result = print_format(*++format, arg);
 			if (result == -1)
 				return (-1);
 			count += result;
@@ -41,7 +41,7 @@ int	ft_printf(const char *format, ...)
 		}
 		format++;
 	}
-	va_end(ap);
+	va_end(arg);
 	return (count);
 }
 
@@ -105,20 +105,20 @@ int	main(void)
 	return (0);
 }*/
 
-static int	print_format(char spec, va_list ap)
+static int	print_format(char spec, va_list arg)
 {
 	if (spec == 'c')
-		return (ft_putchar_fdr(va_arg(ap, int), 1));
+		return (ft_putchar_fdr(va_arg(arg, int), 1));
 	else if (spec == 's')
-		return (ft_putstr_fdr(va_arg(ap, char *), 1));
+		return (ft_putstr_fdr(va_arg(arg, char *), 1));
 	else if (spec == 'd' || spec == 'i')
-		return (ft_putnbr_fdr(va_arg(ap, int), 1));
+		return (ft_putnbr_fdr(va_arg(arg, int), 1));
 	else if (spec == 'u')
-		return (ft_putunsnbr_fdr(va_arg(ap, unsigned int), 1));
+		return (ft_putunsnbr_fdr(va_arg(arg, unsigned int), 1));
 	else if (spec == 'x' || spec == 'X')
-		return (print_hex(va_arg(ap, unsigned int), spec));
+		return (print_hex(va_arg(arg, unsigned int), spec));
 	else if (spec == 'p')
-		return (print_hex((unsigned long)(va_arg(ap, void *)), spec));
+		return (print_hex((unsigned long)(va_arg(arg, void *)), spec));
 	else if (spec == '%')
 		return (ft_putchar_fdr('%', 1));
 	return (-1);
